@@ -76,7 +76,6 @@ namespace TrashCollector.Controllers
             try
             {
                 Customer customer = _dbContext.Customer.Where(m => m.Id == id).FirstOrDefault();
-                customer.Name = customerUpdated.Name;
                 customer.Address = customerUpdated.Address;
                 customer.PickUpDay = customerUpdated.PickUpDay;
                 customer.OneTimePickup = customerUpdated.OneTimePickup;

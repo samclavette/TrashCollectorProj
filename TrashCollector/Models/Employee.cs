@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace TrashCollector.Models
 {
-    [Authorize(Roles = "Employee")]
     public class Employee
     {
         [Key]
@@ -21,7 +20,6 @@ namespace TrashCollector.Models
 
         public string ZipCode { get; set; }
 
-        public bool TrashCollected { get; set; }
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,15 +20,17 @@ namespace TrashCollector.Models
 
         public string Address { get; set; }
 
+        public string ZipCode { get; set; }
+
         public string PickUpDay { get; set; }
 
         public string OneTimePickup { get; set; }
 
         public double Balance { get; set; }
 
-        public string StartDate { get; set; }
+        public string? StartDate { get; set; }
 
-        public string EndDate { get; set; }
+        public string? EndDate { get; set; }
 
         public bool TrashCollected { get; set; }
 

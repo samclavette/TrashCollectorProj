@@ -23,16 +23,19 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customerList = _dbContext.Customer.ToList();
-            return View(customerList);
+            return RedirectToAction("Details");
         }
 
         // GET: Customers/Details/5
         public ActionResult Details()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _dbContext.Customer.Where(m => m.IdentityUserId ==
-            userId).SingleOrDefault();
+            var customer = _dbContext.Customers.Where(m => m.IdentityUserId == userId).SingleOrDefault();
+            if(customer == null)
+            {
+                return RedirectToAction("Create");
+            }
+            else
             return View(customer);
         }
 
@@ -51,7 +54,7 @@ namespace TrashCollector.Controllers
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
-                _dbContext.Customer.Add(customer);
+                _dbContext.Customers.Add(customer);
                 _dbContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -64,7 +67,7 @@ namespace TrashCollector.Controllers
         // GET: Customers/Edit/5
         public ActionResult Edit(int id)
         {
-            Customer customer = _dbContext.Customer.Where(m => m.Id == id).FirstOrDefault();
+            Customer customer = _dbContext.Customers.Where(m => m.Id == id).FirstOrDefault();
             return View(customer);
         }
 
@@ -75,7 +78,7 @@ namespace TrashCollector.Controllers
         {
             try
             {
-                Customer customer = _dbContext.Customer.Where(m => m.Id == id).FirstOrDefault();
+                Customer customer = _dbContext.Customers.Where(m => m.Id == id).FirstOrDefault();
                 customer.Address = customerUpdated.Address;
                 customer.PickUpDay = customerUpdated.PickUpDay;
                 customer.OneTimePickup = customerUpdated.OneTimePickup;
@@ -91,27 +94,28 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Customers/Delete/5
-        public ActionResult Delete(int id)
-        {
-            Customer customer = _dbContext.Customer.Where(m => m.Id == id).FirstOrDefault();
-            return View(customer);
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    Customer customer = _dbContext.Customer.Where(m => m.Id == id).FirstOrDefault();
+        //    return View(customer);
+        //}
 
-        // POST: Customers/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(Customer customer)
-        {
-            try
-            {
-                _dbContext.Customer.Remove(customer);
-                _dbContext.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// POST: Customers/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(Customer customer)
+        //{
+        //    if (customer.Balance == 0)
+        //    try
+        //    {
+        //        _dbContext.Customer.Remove(customer);
+        //        _dbContext.SaveChanges();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

@@ -62,16 +62,25 @@ namespace TrashCollector.Controllers
         // GET: Customers/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Customer customer = _dbContext.Customer.Where(m => m.Id == id).FirstOrDefault();
+            return View(customer);
         }
 
         // POST: Customers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Customer customerUpdated)
         {
             try
             {
+                Customer customer = _dbContext.Customer.Where(m => m.Id == id).FirstOrDefault();
+                customer.Name = customerUpdated.Name;
+                customer.Address = customerUpdated.Address;
+                customer.PickUpDay = customerUpdated.PickUpDay;
+                customer.OneTimePickup = customerUpdated.OneTimePickup;
+                customer.StartDate = customerUpdated.StartDate;
+                customer.EndDate = customerUpdated.EndDate;
+                _dbContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch

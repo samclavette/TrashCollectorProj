@@ -92,16 +92,19 @@ namespace TrashCollector.Controllers
         // GET: Customers/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Customer customer = _dbContext.Customer.Where(m => m.Id == id).FirstOrDefault();
+            return View(customer);
         }
 
         // POST: Customers/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Customer customer)
         {
             try
             {
+                _dbContext.Customer.Remove(customer);
+                _dbContext.SaveChanges()
                 return RedirectToAction(nameof(Index));
             }
             catch

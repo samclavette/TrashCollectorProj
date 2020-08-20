@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrashCollector.Data;
@@ -10,6 +11,7 @@ using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class CustomersController : Controller
     {
         private ApplicationDbContext _dbContext;
@@ -104,7 +106,7 @@ namespace TrashCollector.Controllers
             try
             {
                 _dbContext.Customer.Remove(customer);
-                _dbContext.SaveChanges()
+                _dbContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch

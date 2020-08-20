@@ -15,6 +15,6 @@ namespace TrashCollector.Models
 
         public string ZipCode { get; set; }
 
-        public int MyProperty { get; set; }
+        public bool TrashCollected { get; set; }
     }
 }

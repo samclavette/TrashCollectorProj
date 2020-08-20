@@ -21,14 +21,16 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customerList = _dbContext.
-            return View();
+            var customerList = _dbContext.Customer.ToList();
+            return View(customerList);
         }
 
         // GET: Customers/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            Customer customer = _dbContext.Customer.Where(c => c.Id == id).SingleOrDefault();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _dbContext.Customer.Where(m => m.IdentityUserId ==
+            userId).SingleOrDefault();
             return View(customer);
         }
 

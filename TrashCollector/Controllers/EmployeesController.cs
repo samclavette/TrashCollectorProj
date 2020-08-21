@@ -23,7 +23,7 @@ namespace TrashCollector.Controllers
         // GET: EmployeeController
         public ActionResult Index()
         {
-            DayOfWeek dayOfWeek = new DayOfWeek();
+            var today = DateTime.Today.DayOfWeek.ToString();
             var todaysCustomers = new List<Customer>();
             var oneTimePickups = new List<Customer>();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -35,8 +35,8 @@ namespace TrashCollector.Controllers
             else
             {
                 //var employeeZipCode = _dbContext.Employees.Where(m => m.IdentityUserId == userId).Select(m => m.ZipCode).ToString();
-                todaysCustomers = _dbContext.Customers.Where(m => m.ZipCode == employee.ZipCode).Where(m => m.PickUpDay == dayOfWeek.ToString()).ToList();
-                oneTimePickups = _dbContext.Customers.Where(m => m.OneTimePickup == dayOfWeek.ToString()).ToList(); ;
+                todaysCustomers = _dbContext.Customers.Where(m => m.ZipCode == employee.ZipCode).Where(m => m.PickUpDay == today).ToList();
+                oneTimePickups = _dbContext.Customers.Where(m => m.OneTimePickup == today).ToList();
             }
             return View(todaysCustomers);
         }
@@ -69,7 +69,7 @@ namespace TrashCollector.Controllers
             catch
             {
                 return View();
-    }
+            }
 }
 
         // GET: EmployeeController/Edit/5

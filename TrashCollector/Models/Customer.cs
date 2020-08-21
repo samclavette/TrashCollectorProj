@@ -31,7 +31,7 @@ namespace TrashCollector.Models
         public string? StartDate { get; set; }
 
         public string? EndDate { get; set; }
-
+        
         public bool TrashCollected { get; set; }
 
         [ForeignKey("IdentityUser")]

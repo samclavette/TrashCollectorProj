@@ -25,6 +25,7 @@ namespace TrashCollector.Controllers
         {
             DayOfWeek dayOfWeek = new DayOfWeek();
             var todaysCustomers = new List<Customer>();
+            var oneTimePickups = new List<Customer>();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _dbContext.Employees.Where(m => m.IdentityUserId == userId).FirstOrDefault();
             if (employee == null)
@@ -33,8 +34,9 @@ namespace TrashCollector.Controllers
             }
             else
             {
-                var employeeZipCode = _dbContext.Employees.Where(m => m.IdentityUserId == userId).Select(m => m.ZipCode).ToString();
-                todaysCustomers = (_dbContext.Customers.Where(m => m.ZipCode == employeeZipCode).Where(m => m.PickUpDay == dayOfWeek.ToString())).ToList();
+                //var employeeZipCode = _dbContext.Employees.Where(m => m.IdentityUserId == userId).Select(m => m.ZipCode).ToString();
+                todaysCustomers = _dbContext.Customers.Where(m => m.ZipCode == employee.ZipCode).Where(m => m.PickUpDay == dayOfWeek.ToString()).ToList();
+                oneTimePickups = _dbContext.Customers.Where(m => m.OneTimePickup == dayOfWeek.ToString()).ToList(); ;
             }
             return View(todaysCustomers);
         }
@@ -63,12 +65,12 @@ namespace TrashCollector.Controllers
                 _dbContext.Employees.Add(employee);
                 _dbContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
-            }
+        }
             catch
             {
                 return View();
-            }
-        }
+    }
+}
 
         // GET: EmployeeController/Edit/5
         public ActionResult Edit(int id)

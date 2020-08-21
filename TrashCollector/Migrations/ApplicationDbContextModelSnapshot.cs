@@ -48,22 +48,22 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c6929826-ddc4-425f-a285-2519975b59e4",
-                            ConcurrencyStamp = "1b859362-5da7-4cc2-b0cb-81ad05a93a7e",
+                            Id = "8b32a714-edfa-45f5-b087-baa26cf7633b",
+                            ConcurrencyStamp = "5d26cbab-0bc7-4c69-ab57-49f1fbde25de",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "24915a58-18a9-4089-a638-fab911d44988",
-                            ConcurrencyStamp = "29fc9dcf-863d-4932-9df2-51f33c28a419",
+                            Id = "ab0c1da2-ca44-4ce8-823f-29b1d685c73f",
+                            ConcurrencyStamp = "89755eb7-0808-4113-b1a9-e24712550d1f",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "dd6ca6e5-9c13-47a8-b489-17ffe2847361",
-                            ConcurrencyStamp = "d1dd4152-aece-4846-8a55-555ee60ccb32",
+                            Id = "1ab41d0c-c989-4ae8-a19c-92296084ac60",
+                            ConcurrencyStamp = "cd71c448-6e8d-4291-acb2-d39c1db75a8b",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -300,9 +300,6 @@ namespace TrashCollector.Migrations
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TrashCollected")
-                        .HasColumnType("bit");
 
                     b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");

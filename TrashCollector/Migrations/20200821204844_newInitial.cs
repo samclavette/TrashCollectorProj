@@ -190,7 +190,6 @@ namespace TrashCollector.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     ZipCode = table.Column<string>(nullable: true),
-                    TrashCollected = table.Column<bool>(nullable: false),
                     IdentityUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -207,17 +206,17 @@ namespace TrashCollector.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c6929826-ddc4-425f-a285-2519975b59e4", "1b859362-5da7-4cc2-b0cb-81ad05a93a7e", "Admin", "ADMIN" });
+                values: new object[] { "8b32a714-edfa-45f5-b087-baa26cf7633b", "5d26cbab-0bc7-4c69-ab57-49f1fbde25de", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "24915a58-18a9-4089-a638-fab911d44988", "29fc9dcf-863d-4932-9df2-51f33c28a419", "Customer", "CUSTOMER" });
+                values: new object[] { "ab0c1da2-ca44-4ce8-823f-29b1d685c73f", "89755eb7-0808-4113-b1a9-e24712550d1f", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "dd6ca6e5-9c13-47a8-b489-17ffe2847361", "d1dd4152-aece-4846-8a55-555ee60ccb32", "Employee", "EMPLOYEE" });
+                values: new object[] { "1ab41d0c-c989-4ae8-a19c-92296084ac60", "cd71c448-6e8d-4291-acb2-d39c1db75a8b", "Employee", "EMPLOYEE" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

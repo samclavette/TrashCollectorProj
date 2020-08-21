@@ -52,7 +52,7 @@ namespace TrashCollector.Controllers
         {
             try
             {
-                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
                 _dbContext.Customers.Add(customer);
                 _dbContext.SaveChanges();

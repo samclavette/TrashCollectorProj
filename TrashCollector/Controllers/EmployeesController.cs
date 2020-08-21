@@ -1,18 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TrashCollector.Data;
 
 namespace TrashCollector.Controllers
 {
-    public class EmployeeController : Controller
+    public class EmployeesController : Controller
     {
+        private ApplicationDbContext _dbContext;
+
+        public EmployeesController(ApplicationDbContext dbcontext)
+        {
+            _dbContext = dbcontext;
+        }
         // GET: EmployeeController
         public ActionResult Index()
         {
-            return View();
+            DayOfWeek dayOfWeek = new DayOfWeek();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employeeZipCode = _dbContext.Employees.Where(m => m.IdentityUserId == userId).Select(m => m.ZipCode).ToString();
+            var todaysCustomers = _dbContext.Customers.Where(m => m.ZipCode == employeeZipCode).Where(m => m.PickUpDay == dayOfWeek.ToString()).ToList();
+            return View(todaysCustomers);
         }
 
         // GET: EmployeeController/Details/5

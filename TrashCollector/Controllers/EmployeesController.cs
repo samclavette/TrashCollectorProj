@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrashCollector.Data;
@@ -10,6 +11,7 @@ using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
+    [Authorize(Roles = "Employee")] 
     public class EmployeesController : Controller
     {
         private ApplicationDbContext _dbContext;
@@ -22,14 +24,18 @@ namespace TrashCollector.Controllers
         public ActionResult Index()
         {
             DayOfWeek dayOfWeek = new DayOfWeek();
+            var todaysCustomers = new List<Customer>();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _dbContext.Employees.Where(m => m.IdentityUserId == userId).FirstOrDefault();
             if (employee == null)
             {
                 return RedirectToAction("Create");
             }
-            var employeeZipCode = _dbContext.Employees.Where(m => m.IdentityUserId == userId).Select(m => m.ZipCode).ToString();
-            var todaysCustomers = (_dbContext.Customers.Where(m => m.ZipCode == employeeZipCode).Where(m => m.PickUpDay == dayOfWeek.ToString())).ToList();
+            else
+            {
+                var employeeZipCode = _dbContext.Employees.Where(m => m.IdentityUserId == userId).Select(m => m.ZipCode).ToString();
+                todaysCustomers = (_dbContext.Customers.Where(m => m.ZipCode == employeeZipCode).Where(m => m.PickUpDay == dayOfWeek.ToString())).ToList();
+            }
             return View(todaysCustomers);
         }
 

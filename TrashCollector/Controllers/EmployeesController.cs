@@ -22,8 +22,13 @@ namespace TrashCollector.Controllers
         {
             DayOfWeek dayOfWeek = new DayOfWeek();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _dbContext.Employees.Where(m => m.IdentityUserId == userId).FirstOrDefault();
+            if (employee == null)
+            {
+                return RedirectToAction("Create");
+            }
             var employeeZipCode = _dbContext.Employees.Where(m => m.IdentityUserId == userId).Select(m => m.ZipCode).ToString();
-            var todaysCustomers = _dbContext.Customers.Where(m => m.ZipCode == employeeZipCode).Where(m => m.PickUpDay == dayOfWeek.ToString()).ToList();
+            var todaysCustomers = (_dbContext.Customers.Where(m => m.ZipCode == employeeZipCode).Where(m => m.PickUpDay == dayOfWeek.ToString())).ToList();
             return View(todaysCustomers);
         }
 

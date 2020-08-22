@@ -101,6 +101,11 @@ namespace TrashCollector.Controllers
             }
         }
 
+        //public ActionResult FilterByDay()
+        //{
+
+        //}
+
         // GET: EmployeeController/Delete/5
         //public ActionResult Delete(int id)
         //{

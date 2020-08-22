@@ -75,16 +75,21 @@ namespace TrashCollector.Controllers
         // GET: EmployeeController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Customer customer = _dbContext.Customers.Where(m => m.Id == id).FirstOrDefault();
+            return View(customer);
         }
 
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit()
+        public ActionResult Edit(int id, Customer customerUpdates)
         {
             try
             {
+                Customer customer = _dbContext.Customers.Where(m => m.Id == id).FirstOrDefault();
+                customer.Balance = customerUpdates.Balance;
+                customer.TrashCollected = customerUpdates.TrashCollected;
+                _dbContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch

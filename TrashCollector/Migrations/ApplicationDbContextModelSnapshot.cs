@@ -48,22 +48,22 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8b32a714-edfa-45f5-b087-baa26cf7633b",
-                            ConcurrencyStamp = "5d26cbab-0bc7-4c69-ab57-49f1fbde25de",
+                            Id = "b74b0534-92ae-4968-9fe2-e3b4a86d9264",
+                            ConcurrencyStamp = "21de8cd0-e482-473d-b2ad-6516accef121",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "ab0c1da2-ca44-4ce8-823f-29b1d685c73f",
-                            ConcurrencyStamp = "89755eb7-0808-4113-b1a9-e24712550d1f",
+                            Id = "12110496-754f-40ce-9d68-0272584fbff1",
+                            ConcurrencyStamp = "1adbe042-5c85-44a0-98a9-15dd69eab7a6",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "1ab41d0c-c989-4ae8-a19c-92296084ac60",
-                            ConcurrencyStamp = "cd71c448-6e8d-4291-acb2-d39c1db75a8b",
+                            Id = "5800443c-ff1f-4d1a-959f-cbc3cf6e93f7",
+                            ConcurrencyStamp = "1e548ad3-1a0b-4abe-bb60-621e4d0efe37",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -251,8 +251,8 @@ namespace TrashCollector.Migrations
                     b.Property<double>("Balance")
                         .HasColumnType("float");
 
-                    b.Property<string>("EndDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -263,14 +263,14 @@ namespace TrashCollector.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OneTimePickup")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("OneTimePickup")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PickUpDay")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StartDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("TrashCollected")
                         .HasColumnType("bit");

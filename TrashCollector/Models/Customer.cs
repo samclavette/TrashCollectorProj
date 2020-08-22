@@ -24,13 +24,13 @@ namespace TrashCollector.Models
 
         public string PickUpDay { get; set; }
 
-        public string OneTimePickup { get; set; }
+        public DateTime? OneTimePickup { get; set; }
 
         public double Balance { get; set; }
 
-        public string? StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
-        public string? EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         
         public bool TrashCollected { get; set; }
 

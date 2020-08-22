@@ -36,7 +36,7 @@ namespace TrashCollector.Controllers
             {
                 //var employeeZipCode = _dbContext.Employees.Where(m => m.IdentityUserId == userId).Select(m => m.ZipCode).ToString();
                 todaysCustomers = _dbContext.Customers.Where(m => m.ZipCode == employee.ZipCode).Where(m => m.PickUpDay == today).ToList();
-                oneTimePickups = _dbContext.Customers.Where(m => m.OneTimePickup == today).ToList();
+                //oneTimePickups = _dbContext.Customers.Where(m => m.OneTimePickup == today).ToList();
             }
             return View(todaysCustomers);
         }
@@ -58,19 +58,19 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Employee employee)
         {
-            try
-            {
+            //try
+            //{
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 employee.IdentityUserId = userId;
                 _dbContext.Employees.Add(employee);
                 _dbContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
         }
-            catch
-            {
-                return View();
-            }
-}
+        //catch
+        //{
+        //    return View();
+        //}
+
 
         // GET: EmployeeController/Edit/5
         public ActionResult Edit(int id)
@@ -81,7 +81,7 @@ namespace TrashCollector.Controllers
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit()
         {
             try
             {
@@ -94,24 +94,24 @@ namespace TrashCollector.Controllers
         }
 
         // GET: EmployeeController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: EmployeeController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

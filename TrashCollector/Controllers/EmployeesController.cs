@@ -23,9 +23,11 @@ namespace TrashCollector.Controllers
         // GET: EmployeeController
         public ActionResult Index()
         {
-            var today = DateTime.Today.DayOfWeek.ToString();
+            var dayOfWeek = DateTime.Today.DayOfWeek.ToString();
+            var currentDate = DateTime.Today;
             var todaysCustomers = new List<Customer>();
             var oneTimePickups = new List<Customer>();
+            var todaysCustomersNew = new List<Customer>();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _dbContext.Employees.Where(m => m.IdentityUserId == userId).FirstOrDefault();
             if (employee == null)
@@ -35,10 +37,11 @@ namespace TrashCollector.Controllers
             else
             {
                 //var employeeZipCode = _dbContext.Employees.Where(m => m.IdentityUserId == userId).Select(m => m.ZipCode).ToString();
-                todaysCustomers = _dbContext.Customers.Where(m => m.ZipCode == employee.ZipCode).Where(m => m.PickUpDay == today).ToList();
-                //oneTimePickups = _dbContext.Customers.Where(m => m.OneTimePickup == today).ToList();
+                todaysCustomers = _dbContext.Customers.Where(m => m.ZipCode == employee.ZipCode).Where(m => m.PickUpDay == dayOfWeek).ToList();
+                oneTimePickups = _dbContext.Customers.Where(m => m.OneTimePickup == currentDate).ToList();
+                todaysCustomersNew = todaysCustomers.Union(oneTimePickups).ToList();
             }
-            return View(todaysCustomers);
+            return View(todaysCustomersNew);
         }
 
         // GET: EmployeeController/Details/5

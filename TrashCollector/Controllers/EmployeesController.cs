@@ -24,7 +24,7 @@ namespace TrashCollector.Controllers
         public ActionResult Index()
         {
             var dayOfWeek = DateTime.Today.DayOfWeek.ToString();
-            var currentDate = DateTime.Today;
+            var currentDate = DateTime.Today.Date;
             var todaysCustomers = new List<Customer>();
             var oneTimePickups = new List<Customer>();
             var todaysCustomersNew = new List<Customer>();
@@ -91,6 +91,11 @@ namespace TrashCollector.Controllers
             {
                 Customer customer = _dbContext.Customers.Where(m => m.Id == id).FirstOrDefault();
                 customer.Balance = customerUpdates.Balance;
+                var charge = 5;
+                if (customerUpdates.TrashCollected == true)
+                {
+                    customer.Balance += charge;
+                }
                 customer.TrashCollected = customerUpdates.TrashCollected;
                 _dbContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -101,10 +106,11 @@ namespace TrashCollector.Controllers
             }
         }
 
-        //public ActionResult FilterByDay()
-        //{
-
-        //}
+        public ActionResult FilterByDay()
+        {
+            var allCustomers = _dbContext.Customers.ToList();
+            return View(allCustomers);
+        }
 
         // GET: EmployeeController/Delete/5
         //public ActionResult Delete(int id)

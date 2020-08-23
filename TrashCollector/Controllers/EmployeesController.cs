@@ -106,12 +106,12 @@ namespace TrashCollector.Controllers
             }
         }
 
-        public ActionResult FilterByDay()
+        public ActionResult Monday()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _dbContext.Employees.Where(m => m.IdentityUserId == userId).FirstOrDefault();
-            var employeeZip = _dbContext.Employees.Where(m => m.ZipCode == employee.ZipCode).ToString();
-            var allCustomers = _dbContext.Customers.Where(m => m.ZipCode == employeeZip).ToList();
+            var employeeZip = employee.ZipCode;
+            var allCustomers = _dbContext.Customers.Where(m => m.ZipCode == employeeZip).Where(m => m.PickUpDay == "Monday").ToList();
             return View(allCustomers);
         }
 

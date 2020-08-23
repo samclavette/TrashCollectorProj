@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TrashCollector.Areas.Identity.Pages.Account
 {
@@ -32,6 +33,7 @@ namespace TrashCollector.Areas.Identity.Pages.Account
 
         [BindProperty]
         public InputModel Input { get; set; }
+        public SelectList Roles { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 

@@ -115,6 +115,59 @@ namespace TrashCollector.Controllers
             return View(allCustomers);
         }
 
+        public ActionResult Tuesday()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _dbContext.Employees.Where(m => m.IdentityUserId == userId).FirstOrDefault();
+            var employeeZip = employee.ZipCode;
+            var allCustomers = _dbContext.Customers.Where(m => m.ZipCode == employeeZip).Where(m => m.PickUpDay == "Tuesday").ToList();
+            return View(allCustomers);
+        }
+
+        public ActionResult Wednesday()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _dbContext.Employees.Where(m => m.IdentityUserId == userId).FirstOrDefault();
+            var employeeZip = employee.ZipCode;
+            var allCustomers = _dbContext.Customers.Where(m => m.ZipCode == employeeZip).Where(m => m.PickUpDay == "Wednesday").ToList();
+            return View(allCustomers);
+        }
+
+        public ActionResult Thursday()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _dbContext.Employees.Where(m => m.IdentityUserId == userId).FirstOrDefault();
+            var employeeZip = employee.ZipCode;
+            var allCustomers = _dbContext.Customers.Where(m => m.ZipCode == employeeZip).Where(m => m.PickUpDay == "Thursday").ToList();
+            return View(allCustomers);
+        }
+
+        public ActionResult Friday()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _dbContext.Employees.Where(m => m.IdentityUserId == userId).FirstOrDefault();
+            var employeeZip = employee.ZipCode;
+            var allCustomers = _dbContext.Customers.Where(m => m.ZipCode == employeeZip).Where(m => m.PickUpDay == "Friday").ToList();
+            return View(allCustomers);
+        }
+
+        public ActionResult Saturday()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _dbContext.Employees.Where(m => m.IdentityUserId == userId).FirstOrDefault();
+            var employeeZip = employee.ZipCode;
+            var allCustomers = _dbContext.Customers.Where(m => m.ZipCode == employeeZip).Where(m => m.PickUpDay == "Saturday").ToList();
+            return View(allCustomers);
+        }
+
+        public ActionResult Sunday()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _dbContext.Employees.Where(m => m.IdentityUserId == userId).FirstOrDefault();
+            var employeeZip = employee.ZipCode;
+            var allCustomers = _dbContext.Customers.Where(m => m.ZipCode == employeeZip).Where(m => m.PickUpDay == "Sunday").ToList();
+            return View(allCustomers);
+        }
         // GET: EmployeeController/Delete/5
         //public ActionResult Delete(int id)
         //{
